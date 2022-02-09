@@ -15,7 +15,7 @@ export const signIn= async (req, res)=>{
        }
        const result = new User({firstName,lastName,email,password});
        await result.save();
-       res.staus(201).json({data: result});
+       res.status(201).json({data: result});
     }catch(err){
         res.status(409).json({message: err.message})
     }
