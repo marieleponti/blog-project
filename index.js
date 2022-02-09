@@ -14,7 +14,7 @@ app.use('/users', usersRoutes);
 const PORT = process.env.PORT || 5000 ;
 const password = "7K253KysEZsIkzQQ";
 const name = "blogProject";
-const DB_URL = `mongodb+srv://${name}:${password}@cluster0.qnlqs.mongodb.net/blogProject?retryWrites=true&w=majority;`
+const DB_URL = `mongodb+srv://${name}:${password}@cluster0.qnlqs.mongodb.net/blogProject?retryWrites=true`
 
 app.get("/", (req,res)=>{
     res.send('Hello to blog project api')
