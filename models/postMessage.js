@@ -1,4 +1,3 @@
-​  
 import mongoose from 'mongoose';
 const postSchema = mongoose.Schema({
     category: {type: String, require: true},

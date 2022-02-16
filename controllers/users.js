@@ -1,6 +1,6 @@
 import User from '../models/user.js';
 
-export const signIn= async (req, res)=>{
+export const signUp= async (req, res)=>{
     if(!"firstName" in req.body ||
        !"lastName" in req.body ||
        !"email" in req.body || 
@@ -21,6 +21,24 @@ export const signIn= async (req, res)=>{
     }
 }
 
-export const signUp = async(req, res)=>{
-    res.status(200).json({data: "sign up success"})
+export const signIn = async(req, res)=>{
+    if(!"email" in req.body || !"password" in req.body) {
+        return res.status(404).json({message: "Missing email or password"})
+    }
+     const { email, password } = req.body;
+    try{
+        const oldUser = await User.findOne({email: email});
+        if(!oldUser) {
+            return res.status(404).json({message: "user does not exist"});
+        }
+        const isPasswordCorrect = oldUser.password === password;
+        if(!isPasswordCorrect) {
+            return res.status(400).json({message: "Invalid credential"})
+        }
+        res.status(201).json({data : oldUser}) 
+
+    }catch(err){
+        res.status(409).json({message: err.message})
+    }
+    
 }
